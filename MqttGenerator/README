@@ -1,0 +1,4 @@
+MqttGenerator is a java application.
+MqttGenerator need an input file called file_with_json_alarms.txt containing the alarms, in JSON format, to send.
+To run the application use the runnable jar file: MqttGenerator.jar 
+java -jar MqttGenerator.jar

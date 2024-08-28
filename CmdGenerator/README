@@ -1,0 +1,4 @@
+CmdGenerator is a java application.
+CmdGenerator need an input file called file_with_json_command.txt containing the command(s), in JSON format.
+To run the application use the runnable jar file:
+java -jar CommandGenerator.jar <vesIpAddress> <vesPort>

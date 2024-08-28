@@ -1,0 +1,109 @@
+<!doctype html>
+<html ng-app="PMGenerator">
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" />
+<script src="generator.js"></script>
+
+<link rel="stylesheet" href="../stylesheets/generator.css">
+</head>
+<body>
+	<div ng-controller="CountersController">
+		<h1>
+			PM Generator&emsp;&emsp;<img src="ericsson_logo.png">&emsp;<img
+				src="logo_onap_2017.png">
+		</h1>
+		<br>
+		<div class="tab">
+			<button class="tablinks" onclick="openTab(event, 'Configure')"
+				id="defaultOpen">Configure</button>
+			<button class="tablinks" onclick="openTab(event, 'List')"
+				ng-click="list()">List</button>
+		</div>
+
+		<div id="Configure" class="tabcontent">
+			<table>
+				<tr>
+					<td>Metric group:</td>
+					<td><input type="text" ng-model="groupId" size="30"></td>
+				</tr>
+				<tr>
+					<td>Metric Report/Job ID:</td>
+					<td><input type="text" ng-model="reportId" size="30"></td>
+				</tr>
+				<tr>
+					<td>Metric Period :</td>
+					<td><select ng-model="selectedPeriod"
+						ng-options="period for period in periods">
+					</select></td>
+				</tr>
+			</table>
+			<br>
+			<h3>Metric Counter</h3>
+			<table>
+				<tr ng-repeat="counter in counterList">
+					<label class="list">
+						<td>{{counter.text}}</td>
+						<td>&emsp; <select ng-model="counter.type"
+							ng-options="type for type in counterTypes">
+						</select></td>
+						<td>
+							<button class="btn-clear" ng-click="clearCounter(counter)"
+								style="border: 0; background: none;">
+								<i class="fa fa-trash-o"></i>
+							</button>
+					</td>
+					</label>
+				</tr>
+			</table>
+			<form class="form-addcounters"">
+				<input type="text" ng-model="counterName" size="30"
+					placeholder="add new counter here" ng-model-instant>
+				<button class="btn-add" ng-click="addCounter()">
+					<i class="fa fa-plus" aria-hidden="true"> Add</i>
+				</button>
+				<br> <br>
+				<button class="button" class="btn btn-default"
+					ng-click="activateReport()">Activate Report</button>
+				<button class="button" class="btn btn-default"
+					ng-click="stopReport()">Stop Report</button>
+				<button class="button" class="btn btn-default"
+					ng-click="reactivateReport()">Re-Activate</button>
+				<button class="button" class="btn btn-default"
+					ng-click="removeMetrics()">Remove Group & Report</button>
+			</form>
+		</div>
+		<div id="List" class="tabcontent">
+			<font color="black">
+				<div class="result" ng-repeat="report in reportList">
+					<table>
+						<tr>
+							<td><font color="#016b74">Report:</font></td>
+							<td>{{report.id}}</td>
+						</tr>
+						<tr>
+							<td><font color="#016b74">Groups:</font></td>
+							<td>{{report.groups}}</td>
+						</tr>
+						<tr>
+							<td><font color="#016b74">Period:</font></td>
+							<td>{{report.period}}</td>
+						</tr>
+						<tr>
+							<td><font color="#016b74">State:</font></td>
+							<td>{{report.state}}</td>
+						</tr>
+						<tr>
+							<td><font color="#016b74">Metrics:</font></td>
+							<td>{{report.metrics}}</td>
+						</tr>
+					</table>
+				</div>
+			</font>
+		</div>
+	</div>
+</body>
+</html>

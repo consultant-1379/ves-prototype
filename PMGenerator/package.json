@@ -1,0 +1,13 @@
+{
+  "name": "PMGenerator",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "child-process": "^1.0.2",
+    "express": "^4.15.4",
+    "jade": "*"
+  }
+}

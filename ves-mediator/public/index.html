@@ -1,0 +1,201 @@
+<!doctype html>
+<html ng-app="VES-Mediator">
+<head>
+<title>Ves-Mediator</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" />
+<script src="vesMediatorCfg.js"></script>
+<link rel="stylesheet" href="stylesheets/vesMediatorCfg.css" />
+</head>
+<body>
+	<div ng-controller="MediatorCtrl">
+		<h1>
+			VES-Mediator&emsp;&emsp;<img src="ericsson_logo.png">&emsp;<img src="logo_onap_2017.png">
+		</h1>
+		<br>
+		<div class="tab">
+			<button class="tablinks" onclick="openTab(event, 'VNF')"
+				id="defaultOpen">VNF</button>
+			<button class="tablinks" onclick="openTab(event, 'DCAE-VES')">DCAE-VES</button>
+			<button class="tablinks" onclick="openTab(event, 'PM')">PM</button>
+			<button class="tablinks" onclick="openTab(event, 'Save')" ng-click="configure()" >
+				<i class="fa fa-floppy-o fa-1g"> Save</i>
+			</button>		 
+			<button class="tablinks" onclick="openTab(event, 'Save')" ng-click="reStart()" >
+                <i class="fa fa-refresh fa-1g"> Apply</i>
+            </button>
+		</div>
+
+		<div id="VNF" class="tabcontent">
+			<h3>VNF Configuration</h3>
+			<table>
+				<tr>
+					<td>IP Address:</td>
+					<td><input type="text" ng-model="vnfIp" size="30"></td>
+				</tr>
+				<tr>
+					<td>SNMP Agent Port:</td>
+					<td><input type="text" ng-model="snmpPort" size="30"></td>
+				</tr>
+				<tr>
+					<td>SNMP Trap Listener Port:</td>
+					<td><input type="text" ng-model="snmpTrapListenerPort" size="30"></td>
+				</tr>
+				<tr>
+					<td>PM Port :</td>
+					<td><input type="text" ng-model="pmPort" size="30"></td>
+				</tr>
+				<tr>
+					<td>Name (sourceName) :</td>
+					<td><input type="text" ng-model="sourceName" size="30"></td>
+				</tr>
+				<tr>
+					<td>ID (sourceId) :</td>
+					<td><input type="text" ng-model="sourceId" size="30"></td>
+				</tr>
+				<tr>
+					<td>SFTP username :</td>
+					<td><input type="text" ng-model="sftpUsername" size="30"></td>
+				</tr>
+				<tr>
+					<td>SFTP password :</td>
+					<td><input type="password" ng-model="sftpPasswd" size="30"></td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="DCAE-VES" class="tabcontent">
+			<h3>DCAE VES Configuration</h3>
+			<table>
+				<tr>
+					<td>IP Address:</td>
+					<td><input type="text" ng-model="vesIp" size="30"></td>
+				</tr>
+				<tr>
+					<td>Port:</td>
+					<td><input type="text" ng-model="vesPort" size="30"></td>
+				</tr>
+				<tr>
+                    <td>Username :</td>
+                    <td><input type="text" ng-model="vesUsername" size="30"></td>
+                </tr>
+                <tr>
+                    <td>Password :</td>
+                    <td><input type="password" ng-model="vesPasswd" size="30"></td>
+                </tr>
+			</table>
+		</div>
+
+		<div id="PM" class="tabcontent">
+			<h3>PM Configuration</h3>
+			<table>
+				<tr>
+					<td>Metric Period :</td>
+					<td><select ng-model="selectedPeriod">
+							<optgroup>
+								<option ng-value="period" ng-repeat="period in periods">{{period}}</option>
+							</optgroup>
+					</select></td>
+				</tr>
+				<tr>
+					<td>ROP File Path:</td>
+					<td><input type="text" ng-model="pmRopPath" size="30"></td>
+				</tr>
+				<tr>
+					<td>Metric Counters :</td>
+				</tr>
+				<tr ng-repeat="counter in counterList">
+					<label class="list">
+						<td>&emsp;{{counter.name}}</td>
+						<td>
+							<button class="btn-clear" ng-click="clearCounter(counter)"
+								style="border: 0; background: none;">
+								<i class="fa fa-trash-o" style="color: #016b74"></i>
+							</button>
+					</td>
+					</label>
+				</tr>
+			</table>
+			<input type="text" ng-model="counterName" size="30"
+				placeholder="add new counter here" ng-model-instant>
+			<button class="btn-add" ng-click="addCounter()">
+				<i class="fa fa-plus" aria-hidden="true"> Add</i>
+			</button>
+		</div>
+		<div id="Save" class="tabcontent">
+			<font color="black">
+				<div class="result">
+				    <h3>Response: {{data.result}}</h3>
+					<h3>Mediator Configuration submitted:</h3>
+					<table>
+						<tr>
+							<td>vnfId:</td>
+							<td>{{data.vnfIp}}</td>
+						</tr>
+						<tr>
+							<td>snmpAgentPort:</td>
+							<td>{{data.snmpPort}}</td>
+						</tr>
+						<tr>
+							<td>snmpTrapListenerPort:</td>
+							<td>{{data.snmpTrapListenerPort}}</td>
+						</tr>
+						<tr>
+							<td>pmPort:</td>
+							<td>{{data.pmPort}}</td>
+						</tr>
+						<tr>
+							<td>sourceName:</td>
+							<td>{{data.sourceName}}</td>
+						</tr>
+						<tr>
+							<td>sourceId:</td>
+							<td>{{data.sourceId}}</td>
+						</tr>
+						<tr>
+							<td>vesIp:</td>
+							<td>{{data.vesIp}}</td>
+						</tr>
+						<tr>
+							<td>vesPort:</td>
+							<td>{{data.vesPort}}</td>
+						</tr>
+						</tr>
+                            <td>vesUsername:</td>
+                            <td>{{data.vesUsername}}</td>
+                        </tr>
+                        <tr>
+                            <td>vesPasswd:</td>
+                            <td>"******"</td>
+                        </tr>
+						<tr>
+							<td>pmRopInterval:</td>
+							<td>{{data.pmRopInterval}}</td>
+						</tr>
+						<tr>
+							<td>pmCounterFilter:</td>
+							<td>{{data.pmCounterFilter}}</td>
+						</tr>
+						<tr>
+							<td>pmRopPath:</td>
+							<td>{{data.pmRopPath}}</td>
+						</tr>
+							<td>sftpUsername:</td>
+							<td>{{data.sftpUsername}}</td>
+						</tr>
+						<tr>
+							<td>sftpPasswd:</td>
+							<td>"******"</td>
+						</tr>
+					</table>
+				</div>
+			</font>
+		</div>
+	</div>
+</body>
+</html>

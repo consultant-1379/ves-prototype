@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="MeasDataCollection.xsl"?>
+<measCollecFile xmlns="http://www.3gpp.org/ftp/specs/archive/32_series/32.435#measCollec">
+	<fileHeader fileFormatVersion="32.435 V10.0" vendorName="Ericsson AB">
+		<fileSender localDn="ManagedElement=1" elementType="VASPM"/>
+		<measCollec beginTime="2017-09-22T10:53:00+00:00"/>
+	</fileHeader>
+	<measData>
+		<managedElement localDn="ManagedElement=1" swVersion="CXP9020355_2 1.1.1"/>
+		<measInfo measInfoId="SipGwGroup">
+			<job jobId="web_report1"/>
+			<granPeriod duration="PT60S" endTime="2017-09-22T10:54:00+00:00"/>
+			<repPeriod duration="PT60S"/>
+			<measType p="1">tej</measType>
+			<measValue measObjLdn="WEB04NY">
+				<r p="1">1</r>
+			</measValue>
+		</measInfo>
+	</measData>
+	<fileFooter>
+		<measCollec endTime="2017-09-22T10:54:00+00:00"/>
+	</fileFooter>
+</measCollecFile>

@@ -1,0 +1,80 @@
+.button {
+    background-color: #016b74;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 32px 8px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+h1 {
+  color: #016b74;
+}
+h3 {
+  color: #016b74;
+}
+
+body {
+  color: #016b74;
+}
+
+input[type=text] {
+    border: 1px solid #016b74;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 4px 20px;
+    margin: 4px 0;
+    font-size: 15px;
+}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #dceded;
+    color: #016b74;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: #016b74;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+   background-color: #016b74;
+   color: white;
+}
+
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 24px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+div.result {
+	background-color: #dceded;
+	float: center;
+    width: auto;
+    border-style: solid;
+    border-color: #016b74;
+}
+div.result:nth-child(even) {
+    background-color: white;
+}
